@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Doe - Professional Video Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #1c1c1e;
+        --accent-color: #0a84ff;
+        --text-color: #ffffff;
+        --text-secondary: #86868b;
+        --dark-gray: #2c2c2e;
+    }
+    
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+    
+    header {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+        text-decoration: none;
+    }
+    
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
+    
+    .nav-links li {
+        margin-left: 2rem;
+    }
+    
+    .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+        color: #ff00ff;
+    }
+    
+    main {
+        padding: 80px 5% 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    section {
+        margin-bottom: 5rem;
+        padding-top: 5rem;  /* Add this line */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: var(--text-color);
+    }
+    
+    #home {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-gray) 100%);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 0;
+        padding-top: 0;
+    }
+    
+    .home-content {
+        text-align: center;
+        max-width: 800px;
+        padding: 2rem;
+        background: rgba(28, 28, 30, 0.8);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .main-title {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff00ff, #8a2be2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: none;
+}
+    
+    .subtitle {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+    }
+    
+    .description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+    }
+    
+.cta-button, button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #ff00ff, #8a2be2);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover, button:hover {
+    background: linear-gradient(45deg, #ff33ff, #9d4edd);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 0, 255, 0.3);
+}
+    
+    
+    #home::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, var(--dark-gray) 0%, var(--primary-color) 100%);
+        animation: rotateBackground 20s linear infinite;
+        z-index: -1;
+    }
+    
+    @keyframes rotateBackground {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .video-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .video-item {
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .video-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+    }
+    
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .video-description {
+        padding: 1rem;
+    }
+    
+    .video-description h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .video-description p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+    
+    #contact {
+        background-color: var(--secondary-color);
+        padding: 3rem;
+        border-radius: 10px;
+    }
+
+    #work h2 {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+}
+
+    #work h2::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 4px; /* Adjust this value to make the line thicker or thinner */
+        background: linear-gradient(45deg, #ff00ff, #8a2be2);
+        border-radius: 2px;
+}
+
+    
+    form {
+        display: grid;
+        gap: 1rem;
+    }
+    
+    input, textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-color);
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+
+    
+    footer {
+        background-color: var(--secondary-color);
+        text-align: center;
+        padding: 2rem;
+        margin-top: 5rem;
+    }
+    
+    .social-links a {
+        color: var(--text-color);
+        margin: 0 10px;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+        color: var(--accent-color);
+    }
+    
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: center;
+            align-items: flex-start;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+        }
+        
+        .nav-links li {
+            margin-left: 0;
+            margin-right: 1rem;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+        }
+        
+        .description {
+            font-size: 1rem;
+        }
+        
+        .cta-button {
+            font-size: 1rem;
+            padding: 0.8rem 1.6rem;
+        }
+
+}
+</style>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="https://www.youtube.com/@TheJerminator" class="logo">Jerminator</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#work">My Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+<section id="home" class="visible">
+    <div class="home-content">
+        <h1 class="main-title">Hello There!</h1>
+        <h2 class="subtitle">Professional Video Editing & Post-Production</h2>
+        <p class="description">Welcome to my world of cinematic storytelling. With over a decade of experience, I transform raw footage into compelling narratives that captivate, inspire, and leave a lasting impact. From indie films to corporate videos, I bring your vision to life through the art of editing.</p>
+        <a href="#work" class="cta-button">Explore My Work</a>
+    </div>
+</section>
+        
+        <section id="work">
+            <h2>Portfolio Highlights</h2>
+            <div class="video-section">
+                <div class="video-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dZ5-6Tdy9CQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-description">
+                        <h3>Nature's Palette Edit | Jerminator</h3>
+                        <p>This video showcases my skills in transitions, video stabilization, masking, effects and color grading.</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/video2" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-description">
+                        <h3>Music Video Edit</h3>
+                        <p>Dynamic editing synchronized with the rhythm of an energetic pop track.</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/video3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-description">
+                        <h3>Corporate Brand Video</h3>
+                        <p>Sleek and professional edit showcasing a company's values and achievements.</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/video4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-description">
+                        <h3>Travel Montage</h3>
+                        <p>A vibrant compilation of travel footage, evoking wanderlust and adventure.</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/video5" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-description">
+                        <h3>Documentary Excerpt</h3>
+                        <p>Powerful storytelling through carefully curated interviews and B-roll footage.</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/video3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-description">
+                        <h3>Corporate Brand Video</h3>
+                        <p>Sleek and professional edit showcasing a company's values and achievements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about">
+            <h2>About Me</h2>
+            <p>With over a decade of experience, I specialize in crafting compelling visual narratives across various genres. My expertise spans from indie films to corporate videos, always aiming to evoke emotion and engage audiences through the power of editing.</p>
+        </section>
+        
+<section id="contact">
+    <h2>Get in Touch</h2>
+    <form id="contact-form" action="https://formspree.io/f/meojapne" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+    </main>
+    
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-vimeo"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 Jerminator. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+// Form submission
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var form = event.target;
+    var formData = new FormData(form);
+    
+    fetch(form.action, {
+        method: form.method,
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    }).then(response => {
+        if (response.ok) {
+            alert('Thank you for your message! I will get back to you soon.');
+            form.reset();
+        } else {
+            response.json().then(data => {
+                if (data.errors) {
+                    alert('Oops! There was a problem submitting your form: ' + data.errors.map(error => error.message).join(', '));
+                } else {
+                    alert('Oops! There was a problem submitting your form.');
+                }
+            });
+        }
+    }).catch(error => {
+        alert('Oops! There was a problem submitting your form. Error: ' + error.message);
+    });
+});
+
+
+
+            
+            // Scroll animations
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                } else {
+                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
