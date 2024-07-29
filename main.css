@@ -141,6 +141,29 @@ header {
     text-decoration: none;
     z-index: 1002;
 }
+
+   .highlight {
+    font-size: 1.1rem;
+    background: linear-gradient(45deg, #ff00ff, #8a2be2);
+    background-size: 200% 200%; /* Ensures the gradient covers a larger area for smooth animation */
+    -webkit-background-clip: text; /* For Chrome and Safari */
+    -webkit-text-fill-color: transparent; /* For Chrome and Safari */
+    background-clip: text; /* Standard syntax for other browsers */
+    text-fill-color: transparent; /* Standard syntax for other browsers */
+    animation: gradientAnimation 4s ease infinite; /* Apply animation */
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
     
     .nav-links {
         display: flex;
